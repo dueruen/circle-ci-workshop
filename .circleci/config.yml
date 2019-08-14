@@ -30,7 +30,11 @@ jobs:
             gradle jar
       - store_artifacts:
           path: package/libs
-          destination: prefix  
+          destination: prefix 
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .      
 workflows:
   version: 2
   flow:
