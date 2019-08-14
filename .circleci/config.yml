@@ -32,9 +32,9 @@ jobs:
           path: build/libs
           destination: prefix 
       - persist_to_workspace:
-          root: .
-          paths:
-            - build/libs     
+          root: build/libs
+          paths: 
+            - gildedrose-0.0.1-SNAPSHOT.jar     
   dockerize:
     machine: true
     steps:
