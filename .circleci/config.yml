@@ -14,7 +14,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - persist_to_workspace:
-          root: test
+          root: /tmp/workspace
           paths:
             - 1
             - .       
