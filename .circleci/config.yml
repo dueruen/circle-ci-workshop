@@ -10,7 +10,7 @@ jobs:
           command:
             gradle test
       - store_test_results:
-          path: test/test-results
+          path: build/test-results
       # - attach_workspace:
       #     at: /tmp/workspace
       - persist_to_workspace:
@@ -29,12 +29,20 @@ jobs:
           command:
             gradle jar
       - store_artifacts:
-          path: package/libs
+          path: build/libs
           destination: prefix 
       - persist_to_workspace:
           root: .
           paths:
-            - .      
+            - .     
+  dockerize:
+    machine: true
+    steps:
+      # - attach_workspace:
+      #     at: .  
+      - run: docker login -u $DOCKER_USER -p $  
+      - run: docker build -t $DOCKER_USER/myapp:$CIRCLE_SHA1 .
+      - run: docker push $DOCKER_USER/myapp:$CIRCLE_SHA1
 workflows:
   version: 2
   flow:
@@ -43,3 +51,6 @@ workflows:
       - package:
           requires:
             - test
+      - dockerize:
+          requires:
+            - package
