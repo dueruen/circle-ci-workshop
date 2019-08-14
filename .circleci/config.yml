@@ -22,15 +22,15 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       #- checkout
+      - attach_workspace:
+          at: .  
       - run:
           name: Build
           command:
             gradle jar
       - store_artifacts:
           path: package/libs
-          destination: prefix
-      - attach_workspace:
-          at: .    
+          destination: prefix  
 workflows:
   version: 2
   flow:
