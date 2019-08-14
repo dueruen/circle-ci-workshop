@@ -11,12 +11,11 @@ jobs:
             gradle test
       - store_test_results:
           path: test/test-results
-      - attach_workspace:
-          at: /tmp/workspace
+      # - attach_workspace:
+      #     at: /tmp/workspace
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: .
           paths:
-            - 1
             - .       
   package:
     docker:
@@ -31,7 +30,7 @@ jobs:
           path: package/libs
           destination: prefix
       - attach_workspace:
-          at: /tmp/workspace       
+          at: .    
 workflows:
   version: 2
   flow:
